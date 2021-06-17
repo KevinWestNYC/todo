@@ -1,30 +1,36 @@
-var form = document.getElementById('addForm');
-var itemList = document.getElementById('items');
-var filter = document.getElementById('filter');
+const form = document.getElementById('addForm');
+const taskInput = document.getElementById('task-input');
+const task = document.getElementsByClassName('task')
+const taskList = document.getElementById('task-list');
 
 // Form submit event
 form.addEventListener('submit', addItem);
-// Delete event
-itemList.addEventListener('click', removeItem);
 
 
-function addItem(e){
+taskInput.addEventListener('click', removeItem);
+
+function addItem(e){ 
     e.preventDefault();
     
-    const newItem = document.getElementById('item').value;
-    const createNewTask = document.createElement('li')
-    document.querySelector(".list-group").appendChild(createNewTask);
-    createNewTask.className = "list-group-item"
-    createNewTask.appendChild(document.createTextNode(newItem));
+    const newTask = document.getElementById('task-input').value;
+    const createNewTask = document.createElement('li');
+    document.querySelector("#task-list").appendChild(createNewTask);
+    createNewTask.className = 'task';
+    createNewTask.appendChild(document.createTextNode(newTask));
 
+    const deleteButton = document.createElement('button');
+    deleteButton.className = 'delete-button';
+    deleteButton.appendChild(document.createTextNode('X'));
+    createNewTask.appendChild(deleteButton); 
 }
 
 function removeItem(e){
-    e.preventDefault();
-
+    if(e.target.class = delete-button ){
+        const taskToRemove = e.target.parentElement;
+        taskList.removeChild(taskToRemove);
+      }
     
 }
 
-//function reset the submit form
-//function checkbutton that adds strikethrough
+//function check-button that adds strike-through
 //function button to delete item
