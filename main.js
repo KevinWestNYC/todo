@@ -3,13 +3,10 @@ const taskInput = document.getElementById('task-input');
 const task = document.getElementsByClassName('task')
 const taskList = document.getElementById('task-list');
 
-form.addEventListener('submit',addItem);
+form.addEventListener('submit', addItem);
 form.addEventListener('submit', clearFields);
 taskList.addEventListener('click', removeItem);
-
-function clearFields() {
-    taskInput.value = "";
-}
+taskList.addEventListener('click', strikeThrough);
 
 function addItem(e){ 
     e.preventDefault();
@@ -31,6 +28,10 @@ function addItem(e){
     createNewTask.appendChild(checkBox);
 }
 
+function clearFields() {
+    taskInput.value = "";
+}
+
 function removeItem(e){
     if(e.target.classList.contains('delete-button')){
     const taskToRemove = e.target.parentElement;
@@ -42,7 +43,7 @@ function strikeThrough(e){
     if(e.target.classList.contains('check-box')){
         const taskToStrikethrough = e.target.parentElement;
         taskToStrikethrough.style.textDecoration = "line-through";
-        }
+        } 
 }
 
 //function check-button that adds strike-through
