@@ -40,10 +40,15 @@ function removeItem(e){
 }
 
 function strikeThrough(e){
+    const checkBox = document.querySelector('.check-box')
     if(e.target.classList.contains('check-box')){
         const taskToStrikethrough = e.target.parentElement;
-        taskToStrikethrough.style.textDecoration = "line-through";
+        if (checkBox.checked === true){
+            taskToStrikethrough.style.textDecoration = "line-through";
+        } else {
+            taskToStrikethrough.style.textDecoration = null;
         } 
+    }
 }
 
 //function check-button that adds strike-through
