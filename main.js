@@ -1,39 +1,45 @@
 const form = document.getElementById('addForm');
-const taskInput = document.getElementById('task-input');
-const task = document.getElementsByClassName('task')
-const taskList = document.getElementById('task-list');
 
 form.addEventListener('submit', addItem);
 form.addEventListener('submit', clearFields);
-taskList.addEventListener('click', removeItem);
+document.getElementById('task-list').addEventListener('click', removeItem);
 
 function addItem(e){ 
     e.preventDefault();
-        
-    const newTask = document.getElementById('task-input').value;
-    const createNewTask = document.createElement('li');
-    document.querySelector("#task-list").appendChild(createNewTask);
-    createNewTask.className = 'task';
 
-    const checkBox = createCheckBox()
-    createNewTask.appendChild(checkBox);
+    const taskList = document.querySelector("#task-list");
+    const checkBox = createCheckBox();
+    const task = createTask();
+    const deleteButton = createDeleteButton(); 
+    
+    task.appendChild(checkBox);
+    taskList.appendChild(task);
+    task.appendChild(deleteButton);  
+}
 
-    createNewTask.appendChild(document.createTextNode(newTask));
-
+function createDeleteButton() {
     const deleteButton = document.createElement('button');
     deleteButton.className = 'delete-button';
     deleteButton.appendChild(document.createTextNode('X'));
-    createNewTask.appendChild(deleteButton); 
+    return deleteButton;
+}
+
+function createTask() {
+    const text = document.getElementById('task-input').value;
+    const taskLi = document.createElement('li');
+    taskLi.appendChild(document.createTextNode(text));
+    taskLi.className = 'task';
+    return taskLi;
 }
 
 function clearFields() {
-    taskInput.value = "";
+    document.getElementById('task-input').value = "";
 }
 
 function removeItem(e){
     if(e.target.classList.contains('delete-button')){
     const taskToRemove = e.target.parentElement;
-    taskList.removeChild(taskToRemove);
+    taskToRemove.remove();
     }
 }
 
@@ -44,11 +50,7 @@ function createCheckBox(){
 
     checkBox.addEventListener('click', e => {
         const taskLi = e.target.parentElement;
-        if (checkBox.checked){
-            taskLi.style.textDecoration = "line-through";
-            } else if(checkBox.checked === false){
-                taskLi.style.textDecoration = null;
-         } 
+        taskLi.classList.toggle('done')
     })
     return checkBox;
 }

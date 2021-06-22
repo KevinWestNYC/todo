@@ -46,8 +46,12 @@ a{
 
 .check-box{
     margin-right: 20px;
+    transform: scale(2);
     top: 50%;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
-    
+}
+  
+.done {
+    text-decoration: line-through;
 }
